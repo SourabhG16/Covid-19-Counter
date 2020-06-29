@@ -1,0 +1,40 @@
+<div class='jumbotron bg-white text-center'>
+    <h2 class='display-4'>Covid-19 Tracker-Country Wise</h2>
+    <hr>
+    <div class='mx-auto'>
+    <div class='form group col-lg-5 mx-auto'>
+        <label for='c'>Select Country</label>
+        <select class='form-control' id='c' #Input (change)='updateValues(Input.value)'>
+            <option value="" disabled selected>India</option>
+            <option value="{{coun}}" *ngFor='let coun of countryList' >{{coun}}</option>
+        </select>
+    </div>
+    </div>
+    <app-dashboard-card [totalConfirmedCases]='totalConfirmedCases' 
+    [totalActiveCases]='totalActiveCases' [totalDeaths]='totalDeaths' [totalRecoveredCases]='totalRecoveredCases'
+    ></app-dashboard-card>
+
+    <div class="row">
+        <div class="col">
+         <table class="table">
+             <thead>
+                 <tr>
+                     <th>S.NO</th>
+                     <th>Date</th>
+                     <th>No_Of_Cases</th>
+                 </tr>
+             </thead>
+            <tbody>
+                <tr *ngFor='let cs of selectedCountryData; index as i'>
+                    <td>{{i+1}}</td>
+                    <td>{{cs.date | date}}</td>
+                    <td>{{cs.cases}}</td>
+                </tr>
+            </tbody>
+         </table>
+        </div>
+        <div class='col'>
+            <google-chart [data]="lineChart"></google-chart>
+        </div>
+    </div>
+</div>  
